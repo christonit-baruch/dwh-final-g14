@@ -16,4 +16,4 @@ Try running the following commands:
 
 
 
-Chris's test - 3
+Chris's test - Infinite
