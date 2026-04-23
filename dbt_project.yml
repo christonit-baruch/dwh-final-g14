@@ -24,3 +24,8 @@ models:
     staging:
       +materialized: table
       +schema: staging__nyc_311_street_complaint_motor_vehicle_crash_dataset
+    marts:
+      +materialized: table
+      +schema: staging__nyc_311_street_complaint_motor_vehicle_crash_dataset
+      shared:
+        +materialized: table
