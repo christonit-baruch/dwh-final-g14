@@ -8,9 +8,9 @@ final AS (
         {{ dbt_utils.generate_surrogate_key(['complaints.unique_key']) }} AS request_sgkey,
         complaints.unique_key,
 
-        complaint_type.complaint_sgkey,
-        complaint_status.status_sgkey,
-        problem.problem_sgkey,
+        {#complaint_type.complaint_sgkey,
+         complaint_status.status_sgkey, 
+        problem.problem_sgkey, #}
 
         created_date.date_sgkey AS created_date_sgkey,
         closed_date.date_sgkey AS closed_date_sgkey,
@@ -32,7 +32,7 @@ final AS (
 
     FROM complaints
 
-    LEFT JOIN {{ ref('dim_complaint_type') }} AS complaint_type
+    {# LEFT JOIN {{ ref('dim_complaint_type') }} AS complaint_type
         ON complaints.complaint_type = complaint_type.complaint_type
         AND complaints.descriptor = complaint_type.complaint_description
 
@@ -43,7 +43,7 @@ final AS (
 
     LEFT JOIN {{ ref('dim_problem') }} AS problem
         ON complaints.complaint_type = problem.problem
-        AND complaints.descriptor = problem.problem_detail
+        AND complaints.descriptor = problem.problem_detail #}
 
     LEFT JOIN {{ ref('dim_date') }} AS created_date
         ON CAST(complaints.created_date AS DATE) = created_date.full_date
