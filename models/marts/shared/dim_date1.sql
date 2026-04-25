@@ -16,7 +16,7 @@ WITH all_dates AS (
 
 date_dimension AS (
    SELECT
-       {{ dbt_utils.generate_surrogate_key(['full_date']) }} AS date_key,
+       {{ dbt_utils.generate_surrogate_key(['full_date']) }} AS date_sgkey,
 
        full_date,
        EXTRACT(YEAR FROM full_date) AS year,
