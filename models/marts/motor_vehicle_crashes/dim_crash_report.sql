@@ -9,10 +9,10 @@ final AS (
         source.number_of_persons_killed AS num_persons_killed,
         source.number_of_pedestrians_injured AS num_pedestrians_injured,
         source.number_of_pedestrians_killed AS num_pedestrians_killed,
-        source.number_of_cyclist_injured AS num_cyclist_injured,
-        source.number_of_cyclist_killed AS num_cyclist_killed,
-        source.number_of_motorist_injured AS num_motorist_injured,
-        source.number_of_motorist_killed AS num_motorist_killed
+        source.number_of_cyclist_injured AS num_cyclists_injured,
+        source.number_of_cyclist_killed AS num_cyclists_killed,
+        source.number_of_motorist_injured AS num_motorists_injured,
+        source.number_of_motorist_killed AS num_motorists_killed
     FROM source
 )
 
