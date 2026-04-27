@@ -3,7 +3,7 @@ WITH complaint_statuses AS (
         status,
         agency,
         agency_name
-    FROM {{ ref('stg_nyc_311_dot') }}
+    FROM {{ ref('stg_311_street_complaint') }}
     WHERE status IS NOT NULL
 ),
 dim_complaint_status AS (

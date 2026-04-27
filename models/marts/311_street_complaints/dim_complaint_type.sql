@@ -3,7 +3,7 @@ WITH complaint_types AS (
         complaint_type,
         descriptor        AS complaint_description,
         complaint_category
-    FROM {{ ref('stg_nyc_311_dot') }}
+    FROM {{ ref('stg_311_street_complaint') }}
     WHERE complaint_type IS NOT NULL
 ),
 dim_complaint_type AS (
