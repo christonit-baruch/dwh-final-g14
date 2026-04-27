@@ -8,9 +8,8 @@ final AS (
         {{ dbt_utils.generate_surrogate_key(['complaints.unique_key']) }} AS request_sgkey,
         complaints.unique_key,
 
-        {#complaint_type.complaint_sgkey,
-         complaint_status.status_sgkey, 
-        problem.problem_sgkey, #}
+        complaint_type.complaint_sgkey,
+        complaint_status.status_sgkey, 
 
         created_date.date_sgkey AS created_date_sgkey,
         closed_date.date_sgkey AS closed_date_sgkey,
@@ -32,7 +31,7 @@ final AS (
 
     FROM complaints
 
-    {# LEFT JOIN {{ ref('dim_complaint_type') }} AS complaint_type
+    LEFT JOIN {{ ref('dim_complaint_type') }} AS complaint_type
         ON complaints.complaint_type = complaint_type.complaint_type
         AND complaints.descriptor = complaint_type.complaint_description
 
@@ -40,10 +39,6 @@ final AS (
         ON UPPER(TRIM(complaints.status)) = UPPER(TRIM(complaint_status.status))
         AND complaints.agency = complaint_status.agency
         AND complaints.agency_name = complaint_status.agency_name
-
-    LEFT JOIN {{ ref('dim_problem') }} AS problem
-        ON complaints.complaint_type = problem.problem
-        AND complaints.descriptor = problem.problem_detail #}
 
     LEFT JOIN {{ ref('dim_date') }} AS created_date
         ON CAST(complaints.created_date AS DATE) = created_date.full_date
@@ -53,7 +48,6 @@ final AS (
 
     LEFT JOIN {{ ref('dim_location') }} AS location
         ON complaints.borough = location.borough
-        AND complaints.incident_zip = location.zip_code
 
     LEFT JOIN {{ ref('dim_time') }} AS created_time
         ON CAST(FORMAT_TIMESTAMP('%H%M', complaints.created_date) AS INT64) = created_time.time_sgkey
