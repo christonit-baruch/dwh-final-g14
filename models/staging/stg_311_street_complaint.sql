@@ -4,7 +4,6 @@ WITH source AS (
 
 cleaned AS (
     SELECT
-        -- Grab every single column from the source EXCEPT the four we are about to clean
         * EXCEPT (
             unique_key,
             created_date,
@@ -12,7 +11,6 @@ cleaned AS (
             incident_zip
         ),
         
-        -- Re-add the 4 columns with their EXACT original names, but cleaned up
         CAST(unique_key AS STRING) AS unique_key,
         
         CAST(created_date AS TIMESTAMP) AS created_date,
